@@ -105,22 +105,28 @@ export const BulkPredictionTab: React.FC = () => {
     }
   };
 
-  const downloadSampleTemplate = () => {
-    const csvContent =
-      "hotel,lead_time,arrival_date_year,arrival_date_month,arrival_date_week_number,arrival_date_day_of_month,stays_in_weekend_nights,stays_in_week_nights,adults,children,babies,meal,country,market_segment,distribution_channel,is_repeated_guest,previous_cancellations,previous_bookings_not_canceled,reserved_room_type,assigned_room_type,booking_changes,deposit_type,days_in_waiting_list,customer_type,adr,required_car_parking_spaces,total_of_special_requests\n" +
-      "City Hotel,34,2017,August,32,8,0,2,2,0,0,BB,PRT,Online TA,TA/TO,0,0,0,A,A,0,No Deposit,0,Transient,120.0,0,1\n" +
-      "Resort Hotel,180,2017,July,29,20,2,5,2,1,0,HB,GBR,Offline TA/TO,TA/TO,0,1,0,E,E,0,No Deposit,0,Transient,195.5,1,2\n" +
-      "City Hotel,290,2017,October,41,12,0,3,1,0,0,BB,PRT,Groups,TA/TO,0,2,0,A,A,0,Non Refund,0,Transient,85.0,0,0\n" +
-      "Resort Hotel,15,2017,August,33,14,1,2,2,0,0,BB,ESP,Direct,Direct,1,0,2,D,D,1,No Deposit,0,Transient,150.0,1,1\n" +
-      "City Hotel,95,2017,September,36,6,1,3,2,0,0,BB,DEU,Online TA,TA/TO,0,0,0,A,A,0,No Deposit,0,Transient,110.0,0,0\n" +
-      "City Hotel,140,2017,July,28,11,1,2,2,0,0,BB,FRA,Online TA,TA/TO,0,0,0,A,A,0,No Deposit,0,Transient,135.0,0,1\n" +
-      "Resort Hotel,5,2017,August,34,22,0,1,2,0,0,BB,PRT,Direct,Direct,1,0,1,C,C,0,No Deposit,0,Transient,175.0,1,2\n" +
-      "City Hotel,310,2017,September,37,14,0,2,2,0,0,BB,PRT,Groups,TA/TO,0,1,0,A,A,0,Non Refund,0,Transient,90.0,0,0\n";
+  const downloadSampleTemplate = async () => {
+    try {
+      const res = await fetch("/template_hotel_bookings_batch.csv");
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "template_hotel_bookings_batch.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        return;
+      }
+    } catch {
+      // Fallback
+    }
 
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
+    const fallbackUrl = "/template_hotel_bookings_batch.csv";
     const link = document.createElement("a");
-    link.href = url;
+    link.href = fallbackUrl;
     link.setAttribute("download", "template_hotel_bookings_batch.csv");
     document.body.appendChild(link);
     link.click();
