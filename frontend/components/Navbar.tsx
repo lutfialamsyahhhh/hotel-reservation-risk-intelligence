@@ -31,7 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems = [
     { id: "overview", label: "Ringkasan Eksekutif", icon: Layers },
-    { id: "benchmark", label: "Tolok Ukur Model", icon: BarChart3 },
+    { id: "benchmark", label: "Tolak Ukur Model", icon: BarChart3 },
     { id: "single", label: "Prediksi Satuan", icon: Activity },
     { id: "bulk", label: "Analitik Batch CSV", icon: FileSpreadsheet },
   ] as const;
@@ -54,14 +54,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-3">
           <div
             className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-xs font-medium ${isOnline
-                ? "bg-emerald-950/60 border-emerald-500/30 text-emerald-300"
-                : "bg-rose-950/60 border-rose-500/30 text-rose-300"
+              ? "bg-emerald-950/60 border-emerald-500/30 text-emerald-300"
+              : "bg-rose-950/60 border-rose-500/30 text-rose-300"
               }`}
           >
             <span
               className={`h-2 w-2 rounded-full ${isOnline
-                  ? "bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"
-                  : "bg-rose-500"
+                ? "bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"
+                : "bg-rose-500"
                 }`}
             />
             <span>{isOnline ? "FastAPI Online · CatBoost Aktif" : "Backend Offline"}</span>
@@ -102,8 +102,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
                   className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-150 active:scale-95 ${isActive
-                      ? "bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-xs font-semibold"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50"
+                    ? "bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-xs font-semibold"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/50"
                     }`}
                 >
                   <Icon
